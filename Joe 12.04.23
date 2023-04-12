@@ -1,0 +1,47 @@
+#2
+INSERT INTO rental_records (rental_id, veh_reg_no, customer_id, start_date, end_date) VALUES
+(NULL,
+'GA5555E',
+(SELECT customer_id FROM customers WHERE name='Kumar'),
+CURDATE(),
+DATE_ADD(CURDATE(), INTERVAL 3 MONTH));
+
+
+#4
+select
+r.start_date AS `Start Date`,
+r.end_date AS `End Date`,
+r.veh_reg_no AS `Vehicle No`,
+v.brand AS `Vehicle Brand`,
+c.name AS `Customer Name`
+FROM rental_records AS r
+INNER JOIN vehicles AS v USING (veh_reg_no)
+INNER JOIN customers AS c USING (customer_id)
+where end_date > curdate()
+;
+
+#5
+SELECT
+r.start_date AS `Start Date`,
+r.end_date AS `End Date`,
+r.veh_reg_no AS `Vehicle No`,
+v.brand AS `Vehicle Brand`,
+c.name AS `Customer Name`
+FROM rental_records AS r
+INNER JOIN vehicles AS v USING (veh_reg_no)
+INNER JOIN customers AS c USING (customer_id)
+where '2012-01-10' between r.start_date and r.end_date
+;
+
+#6
+SELECT
+r.start_date AS `Start Date`,
+r.end_date AS `End Date`,
+r.veh_reg_no AS `Vehicle No`,
+v.brand AS `Vehicle Brand`,
+c.name AS `Customer Name`
+FROM rental_records AS r
+INNER JOIN vehicles AS v USING (veh_reg_no)
+INNER JOIN customers AS c USING (customer_id)
+where r.start_date = curdate()
+;
